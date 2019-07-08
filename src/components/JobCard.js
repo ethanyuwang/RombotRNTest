@@ -32,30 +32,27 @@ import { resetJobSelectedIndex } from '../redux';
   company_logo: 'https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcjFlIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--88e15377a539ffd609fc55f485d18cf0386710ed/Otto_Logo_300dpi_jpg.jpg' },
 */
 class JobCard extends Component {
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    let { loading, jobs, jobSelectedIndex, detailView } = this.props
-    if (detailView) {
-      console.log( "++++++++++++++++++++++++++++++++++++++++++++++++++++", "loading? ", loading)
-    }
-  }
 
   _renderSkills = () => {
     let { loading, jobs, jobSelectedIndex, detailView } = this.props
-    //console.log("------------------------------------------------------", "detailView? ", detailView)
     if (detailView) {
-      console.log("------------------------------------------------------", "loading? ", loading, jobs[jobSelectedIndex].relatedSkills)
       if (loading) {
         return (
-          <ActivityIndicator/>
+          <View style={{margin: 16}}>
+            <ActivityIndicator/>
+          </View>
         )
       }
       else {
         if (jobs[jobSelectedIndex].relatedSkills && Array.isArray(jobs[jobSelectedIndex].relatedSkills)) {
           return (
-            <View style={{backgroundColor: 'red'}}>
-              {jobs[jobSelectedIndex].relatedSkills.map((skill, index) => (
-                <Text>{skill.skill_name}</Text>
-              ))}
+            <View style={styles.skillSectionContainer}>
+              <Text style={[styles.content2, {margin: 8}]}>Skills needed</Text>
+              <View style={styles.skillContainer}>
+                {jobs[jobSelectedIndex].relatedSkills.slice(0, 12).map((skill, index) => (
+                  <Text key={skill.skill_uuid} style={styles.skill}>{skill.skill_name}</Text>
+                ))}
+              </View>
             </View>
           )
         }
@@ -112,12 +109,12 @@ class JobCard extends Component {
 
         {detailView && (<View style={styles.separator}/>)}
 
-        {this._renderSkills()}
-
         {detailView && (
           <ScrollView>
+            {this._renderSkills()}
+            {detailView && (<View style={styles.separator}/>)}
             <HTMLView
-              value={job.description}
+              value={"<div>" + job.description + "<div>"}
               stylesheet={styles}
             />
           </ScrollView>
@@ -157,8 +154,6 @@ class JobCard extends Component {
   }
 
   render() {
-    let { loading, jobs, jobSelectedIndex, detailView } = this.props
-    console.log("fireddddddddddddd loading: ", loading)
     return this.props.detailView ? this._renderScrollableModal() : this._renderTouchableCard
   }
 }
@@ -258,8 +253,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     margin: 8
   },
-  p: {
-    margin: 16
+  skillSectionContainer: {
+    margin: 8,
+    marginLeft: 16,
+  },
+  skillContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  skill: {
+    fontSize: 13,
+    color: '#333',
+    margin: 8,
+    marginVertical: 4,
+  },
+  div: {
+    padding: 16,
+    backgroundColor: "#fafbfc",
   }
 })
 
