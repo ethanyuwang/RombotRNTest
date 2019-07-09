@@ -24,31 +24,29 @@ class JobCard extends Component {
 
   _renderSkills = () => {
     let { loading, jobs, jobSelectedIndex, detailView } = this.props
-    if (detailView) {
-      if (loading) {
+    if (loading) {
+      return (
+        <View style={{margin: 24}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
+    else {
+      if (jobs[jobSelectedIndex].relatedSkills && Array.isArray(jobs[jobSelectedIndex].relatedSkills)) {
         return (
-          <View style={{margin: 16}}>
-            <ActivityIndicator/>
+          <View style={styles.skillSectionContainer}>
+            <Text style={[styles.content2, {margin: 8}]}>Skills needed</Text>
+            <View style={styles.skillContainer}>
+              {jobs[jobSelectedIndex].relatedSkills.slice(0, 12).map((skill, index) => (
+                <Text key={skill.skill_uuid} style={styles.skill}>{skill.skill_name}</Text>
+              ))}
+            </View>
           </View>
         )
       }
       else {
-        if (jobs[jobSelectedIndex].relatedSkills && Array.isArray(jobs[jobSelectedIndex].relatedSkills)) {
-          return (
-            <View style={styles.skillSectionContainer}>
-              <Text style={[styles.content2, {margin: 8}]}>Skills needed</Text>
-              <View style={styles.skillContainer}>
-                {jobs[jobSelectedIndex].relatedSkills.slice(0, 12).map((skill, index) => (
-                  <Text key={skill.skill_uuid} style={styles.skill}>{skill.skill_name}</Text>
-                ))}
-              </View>
-            </View>
-          )
-        }
-        else {
-          console.log("jobs[jobSelectedIndex].relatedSkills unavailable: ", jobs[jobSelectedIndex].relatedSkills)
-        }        
-      }
+        console.log("jobs[jobSelectedIndex].relatedSkills unavailable: ", jobs[jobSelectedIndex].relatedSkills)
+      }        
     }
   } 
 
