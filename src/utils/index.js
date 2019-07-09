@@ -30,7 +30,7 @@ export const isIphoneX = () => {
 export const STATUS_BAR_HEIGHGT_ANDROID = 0
 export const STATUS_BAR_HEIGHT_IOS = isIphoneX() ? 44 : 22
 export const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? STATUS_BAR_HEIGHT_IOS : STATUS_BAR_HEIGHGT_ANDROID
-export const HEADER_INNER_HEIGHT = (Platform.OS === 'ios' ? 42 : 52) 
+export const HEADER_INNER_HEIGHT = (Platform.OS === 'ios' ? 48 : 58) 
 export const HEADER_HEIGHT = HEADER_INNER_HEIGHT + STATUS_BAR_HEIGHT
 
 export const BOTTOM_SAFE_HEIGHT = isIphoneX() ? 34 : 0

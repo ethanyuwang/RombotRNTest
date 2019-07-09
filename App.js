@@ -11,23 +11,20 @@ import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 
 import reducer from './src/redux';
-import DemoSelect from './src/screens/DemoSelect'
 import JobList from './src/screens/JobList'
-import JobDetail from './src/screens/JobDetail'
 import BluetoothList from './src/screens/BluetoothList'
 
-const JobsStack = createStackNavigator({
+const AppNavigator = createStackNavigator({
   JobList: JobList,
-  JobDetail: JobDetail,
+  BluetoothList: BluetoothList,
 },{
-  mode: 'modal',
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,
   }
 })
 
-const BluetoothStack = createStackNavigator({
+/*const BluetoothStack = createStackNavigator({
   BluetoothList: BluetoothList,
 })
 
@@ -37,7 +34,7 @@ const AppNavigator = createSwitchNavigator({
   Bluetooth: BluetoothStack,
 },{
   initialRouteName: 'DemoSelect',
-})
+})*/
 
 const AppNavigatorContainer = createAppContainer(AppNavigator);
 

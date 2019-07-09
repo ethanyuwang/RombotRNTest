@@ -6,58 +6,144 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
+ import React, {Component} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
+  FlatList,
+  ActivityIndicator
 } from 'react-native';
+import { BleManager } from 'react-native-ble-plx'
+import { Icon } from 'react-native-elements'
+import { connect } from 'react-redux';
+import { listJobs, setJobSelectedIndexAndGetRelatedSkills } from '../redux';
 
+import { HEADER_HEIGHT } from '../utils'
+import Colors from '../res/Colors'
 
-const BluetoothList = () => {
-  return (
-    <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <View style={styles.body}>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
-  );
+class BluetoothList extends Component {
+
+  componentDidMount() {
+    index = 0
+    BleManager.startDeviceScan(
+      null,
+      (error, scannedDevice) => {
+        console.log(index++, error, scannedDevice)
+      }
+    )
+  }
+
+  componentWillUnmount(){
+    bleManager.stopDeviceScan()
+  }
+
+  _renderHeader = () => {
+    return (
+      <View style={styles.header}>
+        <Icon
+          name="ios-arrow-back"
+          type='ionicon'
+          color={Colors.blue}
+          size={28}
+          containerStyle={{marginBottom: 4}}
+          onPress={() => this.props.navigation.goBack()}
+        />
+        <Text style={styles.title}>Bluetooth</Text>
+      </View>
+    )
+  }
+
+  _renderJobItem = ({item, index}) => {
+    return (
+      <JobCard
+        job={item}
+        onPress={() => this.props.setJobSelectedIndexAndGetRelatedSkills(index)}
+      />
+    )
+  }
+
+  _jobKeyExtractor = (item, index) => item.id;
+
+  _renderFooter = () => {
+    return (
+      <View style={styles.footerContainer}>
+        {this.props.endReached ? (
+          <Text style={styles.footer}>No more jobs</Text>
+        ):(
+          <ActivityIndicator size="large"/>
+        )}
+      </View>
+    )
+  }
+
+  render() {
+    const { jobs } = this.props
+
+    return (
+      <View style={styles.container}>
+        <FlatList
+          style={{flex: 1, paddingBottom: 40}}
+          data={[]}
+          extraData={this.props}
+          keyExtractor={this._jobKeyExtractor}
+          renderItem={this._renderJobItem}
+          ListHeaderComponent={this._renderHeader}
+          ListFooterComponent={this._renderFooter}
+          onEndReached={this._fetchJobs}
+          onEndReachedThreshold={0.2}
+        />
+      </View>
+    )
+  }
 };
 
+
+
 const styles = StyleSheet.create({
-  scrollView: {
-    //backgroundColor: Colors.lighter,
+  container:{
+    flex: 1,
+    backgroundColor: '#fafbfc'
   },
-  body: {
-    //backgroundColor: Colors.white,
+  header: {
+    flexDirection: 'row',
+    height: HEADER_HEIGHT,
+    width: '100%',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    paddingHorizontal: 32,
+    paddingBottom: 4,
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
+  title: {
+    fontSize: 34,
     fontWeight: '600',
-    //color: Colors.black,
+    color: '#000',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    //color: Colors.dark,
+  footerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
   },
-  highlight: {
-    fontWeight: '700',
+  footer: {
+    fontSize: 14,
+    color: '#888'
   },
 });
 
-export default BluetoothList;
+const mapStateToProps = state => {
+  return {
+    loading: state.loading,
+    jobs: state.jobs,
+    jobSelectedIndex: state.jobSelectedIndex,
+    page: state.page,
+    endReached: state.endReached,
+  }
+}
+
+const mapDispatchToProps = {
+  listJobs,
+  setJobSelectedIndexAndGetRelatedSkills,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BluetoothList)

@@ -751,7 +751,7 @@
 				82F7AF4E9FBB4EA2AC8A064D /* libRNVectorIcons-tvOS.a */,
 				E87F7CAB5BBD4866BB4F8C63 /* libFastImage.a */,
 				4E53889F3227471F82F6756C /* libFastImage-tvOS.a */,
-				7198AE391A204651AAB433B6 /* libBleClient.a */,
+				4F650660778345388ECA0D44 /* libBleClient.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -861,6 +861,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = H62ZGSXJRF;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1470,6 +1473,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = H62ZGSXJRF;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -1495,6 +1499,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H62ZGSXJRF;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",

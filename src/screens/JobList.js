@@ -8,10 +8,12 @@ import {
   ActivityIndicator
 } from 'react-native';
 import Modal from "react-native-modal";
+import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { listJobs, setJobSelectedIndexAndGetRelatedSkills } from '../redux';
 import JobCard from '../components/JobCard';
 import { HEADER_HEIGHT } from '../utils'
+import Colors from '../res/Colors'
 
 class JobList extends Component {
 
@@ -28,6 +30,12 @@ class JobList extends Component {
     return (
       <View style={styles.header}>
         <Text style={styles.title}>Jobs</Text>
+        <Icon
+          name="bluetooth-searching"
+          color={Colors.blue}
+          size={24}
+          onPress={() => this.props.navigation.navigate('BluetoothList')}
+        />
       </View>
     )
   }
@@ -87,16 +95,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fafbfc'
   },
   header: {
+    flexDirection: 'row',
     height: HEADER_HEIGHT,
     width: '100%',
-    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    paddingHorizontal: 32,
+    paddingBottom: 4,
   },
   title: {
     fontSize: 34,
     fontWeight: '600',
     color: '#000',
-    margin: 32,
-    marginBottom: 4,
   },
   footerContainer: {
     justifyContent: 'center',
