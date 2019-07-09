@@ -18,7 +18,7 @@
     "react-native-fast-image": "^6.1.0",
     "react-native-gesture-handler": "^1.3.0",
     "react-native-htmlview": "^0.14.0",
-    "react-native-modal": "^11.1.0",
+    "react-native-modal": "https://github.com/zsaraf/react-native-modal/tarball/master",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^3.11.0",
     "react-redux": "^7.1.0",
@@ -30,8 +30,11 @@
     "@babel/core": "7.5.0",
     "@babel/runtime": "7.5.1",
     "babel-jest": "24.8.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "jest": "24.8.0",
     "metro-react-native-babel-preset": "0.55.0",
+    "react-dom": "^16.8.6",
     "react-test-renderer": "16.8.3"
   },
   "jest": {
