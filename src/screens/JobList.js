@@ -35,6 +35,7 @@ class JobList extends Component {
           color={Colors.blue}
           size={24}
           onPress={() => this.props.navigation.navigate('BluetoothList')}
+          hitSlop={{top: 16, left: 16, bottom: 16, right: 16}}
         />
       </View>
     )

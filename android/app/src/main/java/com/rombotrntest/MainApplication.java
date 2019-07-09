@@ -3,6 +3,7 @@ package com.rombotrntest;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.polidea.reactnativeble.BlePackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BlePackage(),
             new FastImageViewPackage(),
             new VectorIconsPackage(),
             new RNGestureHandlerPackage()

@@ -13,10 +13,12 @@ import axiosMiddleware from 'redux-axios-middleware';
 import reducer from './src/redux';
 import JobList from './src/screens/JobList'
 import BluetoothList from './src/screens/BluetoothList'
+import BluetoothDetail from './src/screens/BluetoothDetail'
 
 const AppNavigator = createStackNavigator({
   JobList: JobList,
   BluetoothList: BluetoothList,
+  BluetoothDetail: BluetoothDetail,
 },{
   headerMode: 'none',
   navigationOptions: {

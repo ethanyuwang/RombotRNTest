@@ -9,6 +9,9 @@ export const GET_JOB_ID_FAIL = 'RombotRNTest/jobId/LOAD_FAIL';
 export const GET_RELATED_SKILLS = 'RombotRNTest/relatedSkills/LOAD';
 export const GET_RELATED_SKILLS_SUCCESS = 'RombotRNTest/relatedSkills/LOAD_SUCCESS';
 export const GET_RELATED_SKILLS_FAIL = 'RombotRNTest/relatedSkills/LOAD_FAIL';
+export const ADD_BLE_DEVICE = 'RombotRNTest/bleDevices/ADD_BLE_DEVICE'
+export const SET_BLE_DEVICE_SELECTED = 'RombotRNTest/bleDevices/SET_BLE_DEVICE_SELECTED' 
+export const RESET_BLE_DEVICE_SELECTED = 'RombotRNTest/bleDevices/RESET_BLE_DEVICE_SELECTED'
 
 export default function reducer(
   state = {
@@ -19,6 +22,9 @@ export default function reducer(
     jobSelectedIndex: null,
     page: 1,
     endReached: false,
+    //bluetooth
+    bleDevices: [],
+    bleDeviceSelectedIndex: null,
   }, action
 ) {
   switch (action.type) {
@@ -27,7 +33,7 @@ export default function reducer(
     case GET_JOBS_SUCCESS:
       return { ...state, loading: false, jobs: [...state.jobs, ...action.payload.data], endReached: !(action.payload.data.length > 0), page: state.page + 1 };
     case GET_JOBS_FAIL:
-      return { ...state, loading: false, error: action.payload.error };
+      return { ...state, loading: false, error: action.error };
     case SET_JOB_SELECTED:
       return { ...state, jobSelectedIndex: action.payload.jobSelectedIndex };
     case RESET_JOB_SELECTED:
@@ -41,15 +47,25 @@ export default function reducer(
       updatedJobs = updateObjectInArray(state.jobs, {index: action.meta.previousAction.meta.jobSelectedIndex, data: {jobId}})
       return { ...state, loading: false, jobs: updatedJobs};
     case GET_JOB_ID_FAIL:
-      return { ...state, loading: false, error: action.payload.error };
+      return { ...state, loading: false, error: action.error };
     case GET_RELATED_SKILLS:
       return { ...state, loading: true };
     case GET_RELATED_SKILLS_SUCCESS:
       updatedJobs = updateObjectInArray(state.jobs, {index: action.meta.previousAction.meta.jobSelectedIndex, data: {relatedSkills: action.payload.data.skills}})
       return { ...state, loading: false, jobs: updatedJobs};
     case GET_RELATED_SKILLS_FAIL:
-      console.log("GET_RELATED_SKILLS_FAIL", action)
-      return { ...state, loading: false, error: action.payload.error };
+      return { ...state, loading: false, error: action.error };
+    case ADD_BLE_DEVICE:
+      const { bleDevice } = action.payload
+      //if device is already in list, omit
+      if (state.bleDevices.some(e => e.id === bleDevice.id)) {
+        return {...state}
+      }
+      return {...state, bleDevices: [...state.bleDevices, bleDevice]}
+    case SET_BLE_DEVICE_SELECTED:
+      return { ...state, bleDeviceSelectedIndex: action.payload.bleDeviceSelectedIndex };
+    case RESET_BLE_DEVICE_SELECTED:
+      return { ...state, bleDeviceSelectedIndex: null };
     default:
       return state;
   }
@@ -118,6 +134,30 @@ export function setJobSelectedIndexAndGetRelatedSkills(jobSelectedIndex) {
       })
     }
   }
+}
+
+export function addBleDevice(bleDevice) {
+  return {
+    type: ADD_BLE_DEVICE,
+    payload: {
+      bleDevice
+    }
+  };
+}
+
+export function setBleDeviceSelectedIndex(bleDeviceSelectedIndex) {
+  return {
+    type: SET_BLE_DEVICE_SELECTED,
+    payload: {
+      bleDeviceSelectedIndex
+    }
+  };
+}
+
+export function resetBleDeviceSelectedIndex() {
+  return {
+    type: RESET_BLE_DEVICE_SELECTED,
+  };
 }
 
 
