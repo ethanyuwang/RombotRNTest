@@ -9,6 +9,7 @@ import {
   Platform,
   PermissionsAndroid
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { BleManager } from 'react-native-ble-plx'
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
@@ -17,7 +18,7 @@ import { addBleDevice, setBleDeviceSelectedIndex } from '../redux';
 import { HEADER_HEIGHT } from '../utils'
 import Colors from '../res/Colors'
 
-class BluetoothList extends Component {
+export class BluetoothList extends Component {
 
   constructor(props) {
     super(props)
@@ -31,7 +32,7 @@ class BluetoothList extends Component {
         if (granted) {
           this._startBluetoothDeviceScan()
         }
-        console.log("Failed to get permission")
+        console.warn("Failed to get permission")
       })
     }
     else {
@@ -230,3 +231,9 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BluetoothList)
+
+BluetoothList.propTypes = {
+  bleDevices: PropTypes.array,
+  addBleDevice: PropTypes.func,
+  resetBleDeviceSelectedIndex: PropTypes.func
+}

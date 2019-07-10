@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JobCard Rendering should match to snapshot - as a full screen card, with skills 1`] = `ShallowWrapper {}`;
+
+exports[`JobCard Rendering should match to snapshot - as a full screen card, without skills 1`] = `ShallowWrapper {}`;
+
+exports[`JobCard Rendering should match to snapshot - as a list card 1`] = `ShallowWrapper {}`;

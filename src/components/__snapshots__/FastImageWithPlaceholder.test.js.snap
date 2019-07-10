@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FastImageWithPlaceholder Rendering should match to snapshot - with invalid url 1`] = `ShallowWrapper {}`;
+
+exports[`FastImageWithPlaceholder Rendering should match to snapshot - with valid url 1`] = `ShallowWrapper {}`;
+
+exports[`FastImageWithPlaceholder Rendering should match to snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`FastImageWithPlaceholder Rendering should match to snapshot 2`] = `ShallowWrapper {}`;

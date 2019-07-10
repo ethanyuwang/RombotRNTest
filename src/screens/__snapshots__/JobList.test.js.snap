@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JobList Rendering should match to snapshot -- with modal shown 1`] = `ShallowWrapper {}`;
+
+exports[`JobList Rendering should match to snapshot 1`] = `ShallowWrapper {}`;

@@ -4,6 +4,7 @@ import {
   View,
   ActivityIndicator
 } from 'react-native';
+import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image'
 
 export default class FastImageWithPlaceholder extends PureComponent {
@@ -53,3 +54,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc'
   }
 })
+
+FastImageWithPlaceholder.propTypes = {
+  source: PropTypes.object,
+  style: PropTypes.object,
+}

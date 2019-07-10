@@ -21,3 +21,11 @@ react-native run-ios
 ```
 react-native run-android
 ```
+
+## Testing
+
+To run this demo app on iOS or Android devices or simulators please use:
+
+```
+npm test
+```

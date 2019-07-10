@@ -10,6 +10,7 @@ import {
   Dimensions,
   Platform
 } from 'react-native';
+import PropTypes from 'prop-types';
 import HTMLView from 'react-native-htmlview';
 import Modal from "react-native-modal";
 import { Icon } from 'react-native-elements'
@@ -20,7 +21,7 @@ import Colors from '../res/Colors'
 import { HEADER_INNER_HEIGHT, STATUS_BAR_HEIGHT } from '../utils'
 import { resetJobSelectedIndex } from '../redux';
 
-class JobCard extends Component {
+export class JobCard extends Component {
 
   _renderSkills = () => {
     let { loading, jobs, jobSelectedIndex, detailView } = this.props
@@ -282,3 +283,12 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobCard)
+
+JobCard.propTypes = {
+  detailView: PropTypes.bool,
+  loading: PropTypes.bool,
+  jobs: PropTypes.array,
+  jobSelectedIndex: PropTypes.number,
+  resetJobSelectedIndex: PropTypes.func,
+  onPress: PropTypes.func
+}

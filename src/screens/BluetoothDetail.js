@@ -6,6 +6,7 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { resetBleDeviceSelectedIndex } from '../redux';
@@ -13,7 +14,7 @@ import { resetBleDeviceSelectedIndex } from '../redux';
 import { HEADER_HEIGHT } from '../utils'
 import Colors from '../res/Colors'
 
-class BluetoothDetail extends Component {
+export class BluetoothDetail extends Component {
 
   _onGoBack = () => {
     this.props.resetBleDeviceSelectedIndex()
@@ -144,3 +145,9 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BluetoothDetail)
+
+BluetoothDetail.propTypes = {
+  bleDevices: PropTypes.array,
+  bleDeviceSelectedIndex: PropTypes.number,
+  resetBleDeviceSelectedIndex: PropTypes.func
+}

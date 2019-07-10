@@ -7,6 +7,7 @@ import {
   FlatList,
   ActivityIndicator
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
@@ -15,7 +16,7 @@ import JobCard from '../components/JobCard';
 import { HEADER_HEIGHT } from '../utils'
 import Colors from '../res/Colors'
 
-class JobList extends Component {
+export class JobList extends Component {
 
   componentDidMount() {
     this._fetchJobs()
@@ -136,3 +137,13 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobList)
+
+JobList.propTypes = {
+  loading: PropTypes.bool,
+  jobs: PropTypes.array,
+  jobSelectedIndex: PropTypes.number,
+  page: PropTypes.number,
+  endReached: PropTypes.bool,
+  listJobs: PropTypes.func,
+  setJobSelectedIndexAndGetRelatedSkills: PropTypes.func
+}
