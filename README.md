@@ -24,7 +24,7 @@ react-native run-android
 
 ## Testing
 
-To run this demo app on iOS or Android devices or simulators please use:
+To test please run:
 
 ```
 npm test
