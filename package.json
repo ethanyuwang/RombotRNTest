@@ -16,7 +16,7 @@
     "react-native": "0.59.10",
     "react-native-ble-plx": "^1.0.3",
     "react-native-elements": "^1.1.0",
-    "react-native-fast-image": "^6.1.0",
+    "react-native-fast-image": "^8.3.0",
     "react-native-gesture-handler": "^1.3.0",
     "react-native-htmlview": "^0.14.0",
     "react-native-modal": "https://github.com/zsaraf/react-native-modal/tarball/master",
